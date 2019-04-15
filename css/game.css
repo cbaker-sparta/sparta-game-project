@@ -1,6 +1,6 @@
 * {
   text-align: center;
-  color: white;
+  color: #ffa93a;
   text-shadow: #FC0 1px 0 10px;
 }
 
@@ -34,12 +34,7 @@ body {
 
 /* TEXT */
 
-.lorraine-text {
-  background-color: white;
-  border: black solid 2px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
+
 
 /* SPEECH BUBBLE */
 
@@ -194,5 +189,10 @@ body {
 .button-shape-answer:active {
   background-color: #ed8415;
   color: black;
+  text-shadow: #FC0 1px 0 10px;
+}
+
+.white-text {
+  color: white;
   text-shadow: #FC0 1px 0 10px;
 }

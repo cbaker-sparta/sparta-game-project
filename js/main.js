@@ -1,4 +1,14 @@
-console.log("hello, world");
+$(function () {
+
+console.log("hello world");
+//https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple
+
+//https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple
+
+//https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple
+
+// remember to comment out each section with its feature and console log as I go.
+
 // As a new player
 // I need to be able to enter my name
 // and instructions regarding the game
@@ -23,7 +33,7 @@ console.log("hello, world");
 // As a player
 // I need to know if my answer was correct or incorrect
 // So I can continue with the game
-    // flashing effect on correct answer
+    // setTimeout once answer selected, correct answer shown after 2, flashing effect on correct answer
       // css change for correct answer - make each element/answer box an ID?
     // game over screen with money they have won - animations + message from lorraine kelly
       // css/js animation plus inner html/html change to text boxes and a large message from lorraine
@@ -36,8 +46,8 @@ console.log("hello, world");
     // progress bar that changes colour for each question.
       // on question change add css change to progress ID
 
-// As a
-// I need
+// As a player
+// I need to know when I have reached the threshold checkpoint
 // and
 // So I can
 
@@ -63,3 +73,5 @@ console.log("hello, world");
 // I need
 // and
 // So I can
+
+});
