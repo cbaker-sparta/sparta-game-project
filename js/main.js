@@ -1,3 +1,4 @@
+console.log("hello, world");
 // As a new player
 // I need to be able to enter my name
 // and instructions regarding the game
