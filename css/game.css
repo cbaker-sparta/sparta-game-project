@@ -1,3 +1,198 @@
-h1 {
-  background-color: aqua;
+* {
+  text-align: center;
+  color: white;
+  text-shadow: #FC0 1px 0 10px;
+}
+
+body {
+  background-image: url(../images/studio.jpg);
+  background-repeat: repeat;
+  background-size: contain;
+}
+/* IMAGES */
+
+.logo {
+  margin-top: 30px;
+}
+
+.lorraine {
+  border-radius: 8px;
+}
+
+/* TOP ROW AND COLUMNS */
+
+.left {
+
+}
+
+.middle {
+
+}
+
+.right {
+}
+
+/* TEXT */
+
+.lorraine-text {
+  background-color: white;
+  border: black solid 2px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* SPEECH BUBBLE */
+
+.speech-bubble {
+	position: relative;
+	background: #362968;
+	border-radius: .4em;
+  margin: 20px 40px;
+  padding: 5px;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 16px solid transparent;
+	border-bottom-color: #362968;
+	border-top: 0;
+	border-left: 0;
+	margin-left: -8px;
+	margin-top: -16px;
+}
+
+/* TRIANGLE SHAPED DIV */
+
+.div-shape {
+    position: relative;
+    width:80%;
+    height:36px;
+    margin-top: 3px;
+    margin-left:40px;
+    color:#FFFFFF;
+    background-color:#362968;
+    text-align:center;
+    line-height:40px;
+}
+
+.div-shape:before {
+    content:"";
+    position: absolute;
+    right: 100%;
+    top:0px;
+    width:0px;
+    height:0px;
+    border-top:18px solid transparent;
+    border-right:36px solid #362968;
+    border-bottom:18px solid transparent;
+}
+
+.div-shape:after {
+    content:"";
+    position: absolute;
+    left: 100%;
+    top:0px;
+    width:0px;
+    height:0px;
+    border-top:18px solid transparent;
+    border-left:36px solid #362968;
+    border-bottom:18px solid transparent;
+}
+
+.div-shape-question {
+    position: relative;
+    width:82%;
+    height:80px;
+    margin-top: 30px;
+    color:#FFFFFF;
+    background-color:#3f2f7a;
+    text-align:center;
+    line-height:40px;
+    padding-top: 18px;
+}
+
+.div-shape-question:before {
+    content:"";
+    position: absolute;
+    right: 100%;
+    top:0px;
+    width:0px;
+    height:0px;
+    border-top:40px solid transparent;
+    border-right:80px solid #3f2f7a;
+    border-bottom:40px solid transparent;
+}
+
+.div-shape-question:after {
+    content:"";
+    position: absolute;
+    left: 100%;
+    top:0px;
+    width:0px;
+    height:0px;
+    border-top:40px solid transparent;
+    border-left:80px solid #3f2f7a;
+    border-bottom:40px solid transparent;
+}
+
+.button-shape-answer {
+    position: relative;
+    width:40%;
+    height:60px;
+    margin-top: 6px;
+    margin-left:59px;
+    margin-right:58px;
+    color:#FFFFFF;
+    background-color:#3f2f7a;
+    text-align:center;
+    line-height:40px;
+    text-align: left;
+    border: 0px solid transparent;
+}
+
+.button-shape-answer:before {
+    content:"";
+    position: absolute;
+    right: 100%;
+    top:0px;
+    width:0px;
+    height:0px;
+    border-top:30px solid transparent;
+    border-right:60px solid #3f2f7a;
+    border-bottom:30px solid transparent;
+}
+
+.button-shape-answer:after {
+    content:"";
+    position: absolute;
+    left: 100%;
+    top:0px;
+    width:0px;
+    height:0px;
+    border-top:30px solid transparent;
+    border-left:60px solid #3f2f7a;
+    border-bottom:30px solid transparent;
+}
+
+.button-shape-answer-bottom {
+  margin-bottom: 20px;
+}
+
+/* Change color - #ed8415 */
+
+/* Answer color - #56b53b */
+
+.button-shape-answer:hover {
+  background-color: #624fad;
+}
+
+.button-shape-answer:active {
+  background-color: #ed8415;
+  color: black;
+  text-shadow: #FC0 1px 0 10px;
 }
