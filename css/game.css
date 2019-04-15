@@ -187,12 +187,20 @@ body {
 }
 
 .button-shape-answer:active {
-  background-color: #ed8415;
-  color: black;
-  text-shadow: #FC0 1px 0 10px;
+
 }
 
 .white-text {
   color: white;
   text-shadow: #FC0 1px 0 10px;
+}
+
+.selected-answer, .correctAnswer {
+  background-color: #ed8415;
+  color: black;
+  text-shadow: #FC0 1px 0 10px;
+}
+
+.correct-answer {
+  background-color: #56b53b;
 }

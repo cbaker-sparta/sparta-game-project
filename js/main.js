@@ -17,6 +17,38 @@ console.log("hello world");
     // text field to enter the players name and button to confirm entry
     // next screen gives instructions with button to start game
 
+// BUTTON INPUTS
+var buttonInput = $("button");
+var correctAnswer = true;
+var buttonPressed = "";
+// var correctAnswer = api.index[] -> find the correct answer within api array
+
+$("button").on("click", function () {
+  if (buttonPressed == "") {
+    $(this).addClass("selected-answer");
+    buttonPressed = "answered";
+    console.log(this.value + " was clicked");
+  }
+  setTimeout(function() {
+    $("#B").addClass("correct-answer").html("Correct answer");
+  }, 2000);
+  if (correctAnswer = true) {
+    setTimeout(function() {
+      $("#B").css("background-color", "gray").html("Click again for your next question!");
+      $(".speech-bubble").html("Congratulations! You've won £2,000,000!");
+    }, 4000);
+  }
+
+  console.log("start next questions");
+  // setTimeout(function() {
+  //   $("#question-box").html("").append($("<button.next-question>Click here for your next question</button>"));
+  // }, 3000);
+  // $("button").on("click", function () {
+  //   console.log("start next questions");
+  // })
+})
+
+
 // As a new player
 // I need to see the question clearly
 // and see my options clearly
