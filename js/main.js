@@ -14,8 +14,7 @@ $(function () {
 var $buttons = $(".button");
 var $buttonPressed = "";
 
-var maxNum = 4;
-var randomAssigner =  Math.floor((Math.random() * (maxNum)));
+var $randomNumber = "";
 
 var $question = "";
 var $correctAnswer = "";
@@ -38,6 +37,11 @@ assignData();
     // text field to enter the players name and button to confirm entry
     // next screen gives instructions with button to start game
 
+function rollNumber() {
+  var maxNum = 4;
+  var randomAssigner =  Math.floor((Math.random() * (maxNum)));
+  $randomNumber = randomAssigner;
+}
 
 function assignData() {
 
@@ -52,19 +56,19 @@ $.get("https://opentdb.com/api.php?amount=1&difficulty=easy&type=multiple", func
 }
 
 function assignCorrectAnswer() {
-  if (randomAssigner == 0) {
+  if ($randomNumber == 0) {
     $("#A").html("A. " + $correctAnswer);
     $correctAnswer = "A. " + $correctAnswer;
   }
-  else if (randomAssigner == 1) {
+  else if ($randomNumber == 1) {
     $("#B").html("B. " + $correctAnswer);
     $correctAnswer = "B. " + $correctAnswer;
   }
-  else if (randomAssigner == 2) {
+  else if ($randomNumber == 2) {
     $("#C").html("C. " + $correctAnswer);
     $correctAnswer = "C. " + $correctAnswer;
   }
-  else if (randomAssigner == 3) {
+  else if ($randomNumber == 3) {
     $("#D").html("D. " + $correctAnswer);
     $correctAnswer = "D. " + $correctAnswer;
   }
@@ -139,8 +143,9 @@ function addProgress() {
 }
 
 function clearDataAndRun() {
-  $(".button").html("").removeClass("message correct-answer");
+  $(".button").html("").removeClass("selected-answer message correct-answer");
   $buttonPressed = "";
+  $randomNumber = "";
   $question = "";
   $correctAnswer = "";
   $answers = [];
@@ -148,6 +153,7 @@ function clearDataAndRun() {
 
 
   assignData();
+  rollNumber();
   // selectAndOutput();
 }
 // As a new player
