@@ -21,6 +21,10 @@ var $question = "";
 var $correctAnswer = "";
 var $answers = [];
 
+var $prizeValue = $(".progress-row");
+var $progressLevel = 14;
+
+
 // Functions
 
 assignData();
@@ -55,19 +59,19 @@ $.get("https://opentdb.com/api.php?amount=1&difficulty=easy&type=multiple", func
 
 function assignCorrectAnswer() {
   if (randomAssigner == 0) {
-    $("#0").html("A. " + $correctAnswer);
+    $("#A").html("A. " + $correctAnswer);
     $correctAnswer = "A. " + $correctAnswer;
   }
   else if (randomAssigner == 1) {
-    $("#1").html("B. " + $correctAnswer);
+    $("#B").html("B. " + $correctAnswer);
     $correctAnswer = "B. " + $correctAnswer;
   }
   else if (randomAssigner == 2) {
-    $("#2").html("C. " + $correctAnswer);
+    $("#C").html("C. " + $correctAnswer);
     $correctAnswer = "C. " + $correctAnswer;
   }
   else if (randomAssigner == 3) {
-    $("#3").html("D. " + $correctAnswer);
+    $("#D").html("D. " + $correctAnswer);
     $correctAnswer = "D. " + $correctAnswer;
   }
   console.log($correctAnswer);
@@ -75,25 +79,25 @@ function assignCorrectAnswer() {
 
 function assignAnswers() {
   for (var i = 0; i < $buttons.length; i++) {
-    if ($("#0").html() == "") {
-      $("#0").html("A. " + $answers[i]);
+    if ($("#A").html() == "") {
+      $("#A").html("A. " + $answers[i]);
       $answers[i]--;
     }
-    else if ($("#1").html() == "") {
-      $("#1").html("B. " + $answers[i]);
-      $("#1").html("B. " + $answers[i]);
+    else if ($("#B").html() == "") {
+      $("#B").html("B. " + $answers[i]);
+      $("#B").html("B. " + $answers[i]);
       $answers[i]--;
     }
-    else if ($("#2").html() == "") {
-      $("#2").html("C. " + $answers[i]);
-      $("#2").html("C. " + $answers[i]);
-      $("#2").html("C. " + $answers[i]);
+    else if ($("#C").html() == "") {
+      $("#C").html("C. " + $answers[i]);
+      $("#C").html("C. " + $answers[i]);
+      $("#C").html("C. " + $answers[i]);
       $answers[i]--;
     }
-    else if ($("#3").html() == "") {
-      $("#3").html("D. " + $answers[i]);
-      $("#3").html("D. " + $answers[i]);
-      $("#3").html("D. " + $answers[i]);
+    else if ($("#D").html() == "") {
+      $("#D").html("D. " + $answers[i]);
+      $("#D").html("D. " + $answers[i]);
+      $("#D").html("D. " + $answers[i]);
       $answers[i]--;
     }
   }
@@ -105,8 +109,6 @@ $($buttons).on("click", function () {
   if ($buttonPressed == "") {
     $(this).addClass("selected-answer");
     $buttonPressed = $(this);
-    console.log(this.value + " was clicked");
-    console.log($buttonPressed);
   }
   setTimeout(function() {
     if ($correctAnswer == $buttonPressed.html()) {
@@ -123,8 +125,9 @@ $($buttons).on("click", function () {
   if ($correctAnswer == $buttonPressed.html()) {
     setTimeout(function() {
       $buttonPressed.css("background-color", "gray").html("Click again for your next question!");
-      $(".speech-bubble").html('"Congratulations! You\'ve won £!""').addClass(" message").css("background-color", "green");
-    }, 4000); // THESE DON'T CURRENTLY WORK
+      $(".speech-bubble").html('"Congratulations! You\'ve won!"').addClass(" message").css("background-color", "green");
+      addProgress();
+    }, 4000);
   }
   else if ($correctAnswer != $buttonPressed.html()) {
     setTimeout(function() {
@@ -135,6 +138,30 @@ $($buttons).on("click", function () {
 })
 }
 
+function addProgress() {
+  $($prizeValue[$progressLevel]).addClass("current-progress");
+  $progressLevel--;
+}
+
+// function addProgress() {
+//   for (var i = 0; i < $prizeValue.length; i++) {
+//     if ($($prizeValue[i]) == ($progressLevel[i])) {
+//       $($prizeValue[i]).addClass(" current-progress");
+//       $progressLevel.shift();
+//     }
+//     console.log($prizeValue[i]);
+//   }
+// }
+
+function clearDataAndRun() {
+  $buttonPressed = "";
+  $question = "";
+  $correctAnswer = "";
+  $answers = [];
+
+  assignData();
+  selectAndOutput();
+}
 // As a new player
 // I need to see the question clearly
 // and see my options clearly

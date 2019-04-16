@@ -204,5 +204,13 @@ body {
 }
 
 .correct-answer {
-  background-color: #56b53b;
+  background-color: green;
+}
+
+.progress-row {
+
+}
+
+.current-progress {
+  background-color: green;
 }
