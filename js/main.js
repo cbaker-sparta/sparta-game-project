@@ -28,7 +28,7 @@ var $progressLevel = 14;
 // Functions
 
 assignData();
-selectAndOutput();
+// selectAndOutput();
 
 // As a new player
 // I need to be able to enter my name
@@ -38,11 +38,6 @@ selectAndOutput();
     // text field to enter the players name and button to confirm entry
     // next screen gives instructions with button to start game
 
-// BUTTON INPUTS
-
-// creat a var for question - apply value to question
-// create a new array and pull the three incorrect
-// creat new var for correct for each button random math to ap
 
 function assignData() {
 
@@ -55,7 +50,6 @@ $.get("https://opentdb.com/api.php?amount=1&difficulty=easy&type=multiple", func
     assignAnswers();
   });
 }
-
 
 function assignCorrectAnswer() {
   if (randomAssigner == 0) {
@@ -103,8 +97,7 @@ function assignAnswers() {
   }
 }
 
-function selectAndOutput() {
-
+// function selectAndOutput() {
 $($buttons).on("click", function () {
   if ($buttonPressed == "") {
     $(this).addClass("selected-answer");
@@ -112,55 +105,50 @@ $($buttons).on("click", function () {
   }
   setTimeout(function() {
     if ($correctAnswer == $buttonPressed.html()) {
-      $buttonPressed.addClass("correct-answer").html("Correct Answer!");
+      $buttonPressed.addClass(" correct-answer").html("Correct Answer!");
     }
     else {
       for (var i = 0; i < $buttons.length; i++) {
         if ($($buttons[i]).html() == $correctAnswer) {
-          $($buttons[i]).addClass("correct-answer").html("Correct Answer!");
+          $($buttons[i]).addClass(" correct-answer").html("Correct Answer!");
         }
       }
     }
   }, 2000);
   if ($correctAnswer == $buttonPressed.html()) {
     setTimeout(function() {
-      $buttonPressed.css("background-color", "gray").html("Click again for your next question!");
-      $(".speech-bubble").html('"Congratulations! You\'ve won!"').addClass(" message").css("background-color", "green");
+      $(".speech-bubble").html('"Congratulations! You\'ve won!"').addClass(" message correct-answer");
       addProgress();
+    }, 3000);
+    setTimeout(function() {
+      clearDataAndRun();
     }, 4000);
   }
   else if ($correctAnswer != $buttonPressed.html()) {
     setTimeout(function() {
       $buttonPressed.css("background-color", "gray").html("God, I'm sorry but you really are garbage! TRY AGAIN?");
-      $(".speech-bubble").html('"Awwww, poor you. You leave today with nothing!"').addClass(" message").css("background-color", "red");
-    }, 4000);
+      $(".speech-bubble").html('"Awwww, poor you. You leave today with nothing!"').addClass(" message wrong");
+    }, 3000);
   }
 })
-}
+// }
 
 function addProgress() {
   $($prizeValue[$progressLevel]).addClass("current-progress");
   $progressLevel--;
 }
 
-// function addProgress() {
-//   for (var i = 0; i < $prizeValue.length; i++) {
-//     if ($($prizeValue[i]) == ($progressLevel[i])) {
-//       $($prizeValue[i]).addClass(" current-progress");
-//       $progressLevel.shift();
-//     }
-//     console.log($prizeValue[i]);
-//   }
-// }
-
 function clearDataAndRun() {
+  $(".button").html("").removeClass("message correct-answer");
   $buttonPressed = "";
   $question = "";
   $correctAnswer = "";
   $answers = [];
+  $(".speech-bubble").html("Your next question is...");
+
 
   assignData();
-  selectAndOutput();
+  // selectAndOutput();
 }
 // As a new player
 // I need to see the question clearly

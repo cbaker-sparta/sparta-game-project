@@ -19,19 +19,6 @@ body {
   border-radius: 8px;
 }
 
-/* TOP ROW AND COLUMNS */
-
-.left {
-
-}
-
-.middle {
-
-}
-
-.right {
-}
-
 /* TEXT */
 
 .message {
@@ -45,7 +32,7 @@ body {
 	background: #362968;
 	border-radius: .4em;
   margin: 20px 40px;
-  padding: 5px;
+  padding: 1px 5px 5px 5px;
 }
 
 .speech-bubble:after {
@@ -205,6 +192,10 @@ body {
 
 .correct-answer {
   background-color: green;
+}
+
+.wrong {
+  background-color: red;
 }
 
 .progress-row {
