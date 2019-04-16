@@ -1,6 +1,6 @@
 $(function () {
 
-console.log("hello world");
+
 //https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple
 
 //https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple
@@ -8,6 +8,23 @@ console.log("hello world");
 //https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple
 
 // remember to comment out each section with its feature and console log as I go.
+
+// Global variables
+
+var $buttons = $(".button");
+var $buttonPressed = "";
+
+var maxNum = 4;
+var randomAssigner =  Math.floor((Math.random() * (maxNum)));
+
+var $question = "";
+var $correctAnswer = "";
+var $answers = [];
+
+// Functions
+
+assignData();
+selectAndOutput();
 
 // As a new player
 // I need to be able to enter my name
@@ -18,15 +35,7 @@ console.log("hello world");
     // next screen gives instructions with button to start game
 
 // BUTTON INPUTS
-var $buttons = $(".button");
-var $buttonPressed = "";
 
-var maxNum = 4;
-var randomAssigner =  Math.floor((Math.random() * (maxNum)));
-
-var $question = "";
-var $correctAnswer = "";
-var $answers = [];
 // creat a var for question - apply value to question
 // create a new array and pull the three incorrect
 // creat new var for correct for each button random math to ap
@@ -123,19 +132,9 @@ $($buttons).on("click", function () {
       $(".speech-bubble").html('"Awwww, poor you. You leave today with nothing!"').addClass(" message").css("background-color", "red");
     }, 4000);
   }
-
-  console.log("start next questions");
-  // setTimeout(function() {
-  //   $("#question-box").html("").append($("<button.next-question>Click here for your next question</button>"));
-  // }, 3000);
-  // $("button").on("click", function () {
-  //   console.log("start next questions");
-  // })
 })
 }
 
-assignData();
-selectAndOutput();
 // As a new player
 // I need to see the question clearly
 // and see my options clearly
