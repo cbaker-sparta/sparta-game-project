@@ -1,13 +1,14 @@
 $(function () {
 
-
+// EASY API
 //https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple
 
+// MEDIUM API
 //https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple
 
+// HARD API
 //https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple
 
-// remember to comment out each section with its feature and console log as I go.
 
 // Global variables
 
@@ -18,11 +19,13 @@ var $randomNumber = "";
 
 var $question = "";
 var $correctAnswer = "";
+var $correctButton = "";
 var $answers = [];
 
 var $prizeValue = $(".progress-row");
 var $progressLevel = 14;
-
+var $prizeString = "A packet of Worcester Sauce crisps!";
+var $grandPrize = "";
 
 // Functions
 
@@ -43,9 +46,10 @@ function rollNumber() {
   $randomNumber = randomAssigner;
 }
 
-function assignData() {
+rollNumber();
 
-$.get("https://opentdb.com/api.php?amount=1&difficulty=easy&type=multiple", function(data) {
+function assignData() {
+  $.get("https://opentdb.com/api.php?amount=1&difficulty=&type=multiple", function(data) {
     $question = data.results[0].question;
     $("#question-box").html($question);
     $correctAnswer = data.results[0].correct_answer;
@@ -59,18 +63,22 @@ function assignCorrectAnswer() {
   if ($randomNumber == 0) {
     $("#A").html("A. " + $correctAnswer);
     $correctAnswer = "A. " + $correctAnswer;
+    $correctButton = "A";
   }
   else if ($randomNumber == 1) {
     $("#B").html("B. " + $correctAnswer);
     $correctAnswer = "B. " + $correctAnswer;
+    $correctButton = "B";
   }
   else if ($randomNumber == 2) {
     $("#C").html("C. " + $correctAnswer);
     $correctAnswer = "C. " + $correctAnswer;
+    $correctButton = "C";
   }
   else if ($randomNumber == 3) {
     $("#D").html("D. " + $correctAnswer);
     $correctAnswer = "D. " + $correctAnswer;
+    $correctButton = "D";
   }
   console.log($correctAnswer);
 }
@@ -101,73 +109,124 @@ function assignAnswers() {
   }
 }
 
-// function selectAndOutput() {
 $($buttons).on("click", function () {
   if ($buttonPressed == "") {
     $(this).addClass("selected-answer");
     $buttonPressed = $(this);
   }
+  console.log($buttonPressed.html().substring(0,1));
   setTimeout(function() {
-    if ($correctAnswer == $buttonPressed.html()) {
+    if ($correctButton == $buttonPressed.html().substring(0,1)) {
       $buttonPressed.addClass(" correct-answer").html("Correct Answer!");
     }
     else {
       for (var i = 0; i < $buttons.length; i++) {
-        if ($($buttons[i]).html() == $correctAnswer) {
+        if ($($buttons[i]).html().substring(0,1) == $correctButton) {
           $($buttons[i]).addClass(" correct-answer").html("Correct Answer!");
         }
       }
     }
-  }, 2000);
-  if ($correctAnswer == $buttonPressed.html()) {
+  }, 1000);
+  if ($correctButton == $buttonPressed.html().substring(0,1)) {
     setTimeout(function() {
-      $(".speech-bubble").html('"Congratulations! You\'ve won!"').addClass(" message correct-answer");
+      $(".speech-bubble").html('"Congratulations! You\'ve won ' + $prizeString).addClass(" message correct-answer");
       addProgress();
-    }, 3000);
+    }, 2000);
     setTimeout(function() {
       clearDataAndRun();
-    }, 4000);
+    }, 3000);
   }
-  else if ($correctAnswer != $buttonPressed.html()) {
+  else if ($correctButton != $buttonPressed.html().substring(0,1)) {
     setTimeout(function() {
-      $buttonPressed.css("background-color", "gray").html("God, I'm sorry but you really are garbage! TRY AGAIN?");
-      $(".speech-bubble").html('"Awwww, poor you. You leave today with nothing!"').addClass(" message wrong");
+      $buttonPressed.html("God, I'm sorry but you really are garbage! Better luck next time.");
+      $(".speech-bubble").html('"Awwww, poor you. Today you leave with nothing!"').addClass(" message wrong");
     }, 3000);
   }
 })
-// }
 
 function addProgress() {
   $($prizeValue[$progressLevel]).addClass("current-progress");
   $progressLevel--;
+  switch ($progressLevel) {
+    case 13:
+      $prizeString = "£200,000!";
+      break;
+    case 12:
+      $prizeString = "£300,000!";
+      break;
+    case 11:
+      $prizeString = "£500,000!";
+      break;
+    case 10:
+      $prizeString = "A trip to Algeria with Paddy McGuiness!";
+      break;
+    case 9:
+      $prizeString = "£2,000,000!";
+      break;
+    case 8:
+      $prizeString = "One bottle of Fiji OR Dasani water!";
+      break;
+    case 7:
+      $prizeString = "£8,000,000!";
+      break;
+    case 6:
+      $prizeString = "£16,000,000!";
+      break;
+    case 5:
+      $prizeString = "An invitation to a live Antique's Roadshow recording OF YOUR CHOICE!";
+      break;
+    case 4:
+      $prizeString = "£64,000,000!";
+      break;
+    case 3:
+      $prizeString = "£125,000,000!";
+      break;
+    case 2:
+      $prizeString = "A spa day with the actor who played Babe!";
+      break;
+    case 1:
+      $prizeString = "£500,000,000!";
+      break;
+    case 0:
+      $prizeString = "£1 Billion!";
+      break;
+    default:
+      $prizeString = "NOTHING!";
+  }
+
+  if ($progressLevel >= 10) {
+    $grandPrize = "Nothing!";
+  }
+  else if ($progressLevel < 10 && $progressLevel >= 5) {
+    $grandPrize = "A trip to Algeria with Paddy McGuiness!";
+  }
+  else if ($progressLevel < 5 && $progressLevel >= 1) {
+    $grandPrize = "An invitation to a live Antique's Roadshow recording OF YOUR CHOICE!";
+  }
+  else if ($progressLevel == 0) {
+    $grandPrize = "£1 Billion!";
+  }
+  console.log($progressLevel);
+  // console.log($prizeValue);
+  //   console.log($prizeString);
+  console.log($grandPrize);
 }
+
 
 function clearDataAndRun() {
   $(".button").html("").removeClass("selected-answer message correct-answer");
+  $(".speech-bubble").html("Your next question is...").removeClass("wrong correct-answer");
   $buttonPressed = "";
   $randomNumber = "";
   $question = "";
   $correctAnswer = "";
+  $correctButton = "";
   $answers = [];
-  $(".speech-bubble").html("Your next question is...");
-
 
   assignData();
   rollNumber();
-  // selectAndOutput();
 }
-// As a new player
-// I need to see the question clearly
-// and see my options clearly
-// So I can correctly attempt to answer the question and proceed with the game.
-    // onlick "next question"?
-    // change inner html/html of question box
-    // change inner html/html of all answer boxes
 
-// As a player
-// I need to see my answer has been accepted/where my cursos is
-// So I can be sure what my cursor is selecting/has selected
-    // hover effect over buttons and color change onclick
 
 // As a player
 // I need to know if my answer was correct or incorrect
@@ -198,19 +257,5 @@ function clearDataAndRun() {
     // random text output random math - on whatever number output the text from that numbered response
     // set invterval to output display box from hidden to visible + change inner html to random message every x amount of seconds
 
-// As a designer
-// I need to make the questions both answerable but relatively difficult for each question tier
-// So I can make the game engaging but also challenging
-    // -> can I link varying API's for each question tier?
-
-// As a
-// I need
-// and
-// So I can
-
-// As a
-// I need
-// and
-// So I can
 
 });

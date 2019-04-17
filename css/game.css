@@ -2,6 +2,7 @@
   text-align: center;
   color: #ffa93a;
   text-shadow: #FC0 1px 0 10px;
+  font-family: 'Sintony', sans-serif;
 }
 
 body {
@@ -23,6 +24,14 @@ body {
 
 .message {
   font-size: 26px;
+}
+
+.question {
+  font-size: 18px;
+}
+
+.answer {
+  font-size: 16px;
 }
 
 /* SPEECH BUBBLE */
