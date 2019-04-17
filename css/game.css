@@ -34,6 +34,11 @@ body {
   font-size: 16px;
 }
 
+.white-text {
+  color: white;
+  text-shadow: #FC0 1px 0 10px;
+}
+
 /* SPEECH BUBBLE */
 
 .speech-bubble {
@@ -59,7 +64,7 @@ body {
 	margin-top: -16px;
 }
 
-/* TRIANGLE SHAPED DIV */
+/* TRIANGLE SHAPED PROGRESS DIVS */
 
 .div-shape {
     position: relative;
@@ -133,6 +138,7 @@ body {
     border-bottom:18px solid transparent;
 }
 
+/* QUESTI0N DIV STYLING */
 
 .div-shape-question {
     position: relative;
@@ -170,7 +176,7 @@ body {
     border-bottom:40px solid transparent;
 }
 
-/* Button shape answer */
+/* ANSWER DIVS */
 
 .button-shape-answer {
     position: relative;
@@ -211,6 +217,8 @@ body {
     border-bottom:30px solid transparent;
 }
 
+/* USER SELECTED DIV STYLING */
+
 .selected-answer {
     position: relative;
     width:40%;
@@ -249,6 +257,8 @@ body {
     border-left:60px solid #ed8415;;
     border-bottom:30px solid transparent;
 }
+
+/* CORRECT ANSWER DIV STYLING */
 
 .correct-answer {
     position: relative;
@@ -289,44 +299,6 @@ body {
     border-bottom:30px solid transparent;
 }
 
-.button-shape-answer-bottom {
-  margin-bottom: 20px;
-}
-
-/*  */
-
-.white-text {
-  color: white;
-  text-shadow: #FC0 1px 0 10px;
-}
-
-.selected-answer, .correctAnswer {
-  color: black;
-  text-shadow: #FC0 1px 0 10px;
-}
-
-.correct-styling {
-  background-color: green;
-}
-
-.wrong {
-  background-color: #d13030;
-}
-
-.progress-row {
-  /* NULL STYLE VALUE - just used to call all instances via class */
-}
-
-.difficulty-header {
-  margin-bottom: 10px;
-}
-
-.button-styling {
-  margin: 10px 3px;
-  background-color: #ffa93a;
-  color: #362968;
-}
-
 /* Modal styling */
 
 .modal-styles {
@@ -345,4 +317,37 @@ body {
 .modal-win {
   background-color: green;
   font-size: 28px;
+}
+
+.difficulty-header {
+  margin-bottom: 10px;
+}
+
+.button-styling {
+  margin: 10px 3px;
+  background-color: #ffa93a;
+  color: #362968;
+}
+
+/* EXTRAS */
+
+.button-shape-answer-bottom {
+  margin-bottom: 20px;
+}
+
+.selected-answer, .correctAnswer {
+  color: black;
+  text-shadow: #FC0 1px 0 10px;
+}
+
+.correct-styling {
+  background-color: green;
+}
+
+.wrong {
+  background-color: #d13030;
+}
+
+.progress-row {
+  /* NULL STYLE VALUE - just used to call all instances via class */
 }

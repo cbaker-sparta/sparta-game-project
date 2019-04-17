@@ -1,5 +1,7 @@
 $(function () {
 
+// Way to dispaly instruction and difficulty selection modal on load.
+
 $(window).on('load',function(){
   $('#myModal').modal('show');
 });
@@ -26,6 +28,8 @@ var $grandPrize = "nothing!";
 // Functions
 
 assignData();
+
+// Functions assigning difficulty of questions and then assigning the API drawn questions and answers to buttons.
 
 function rollNumber() {
   var maxNum = 4;
@@ -109,12 +113,13 @@ function assignAnswers() {
   }
 }
 
+// Logic and functions adding event listeners to the buttons and checking if the users input was correct, then the logic regarding what happens after their selection.
+
 $($buttons).on("click", function () {
   if ($buttonPressed == "") {
     $(this).addClass(" selected-answer");
     $buttonPressed = $(this);
   }
-  console.log($buttonPressed.html().substring(0,1));
   setTimeout(function() {
     if ($correctButton == $buttonPressed.html().substring(0,1)) {
       $buttonPressed.addClass(" correct-answer").html("Correct Answer!");
@@ -144,6 +149,8 @@ $($buttons).on("click", function () {
     }, 3000);
   }
 })
+
+// Condtional statments, cycling the prizes to be output in the speech bubble, checkpoint, win and game over modals.
 
 function addProgress() {
   $($prizeValue[$progressLevel]).addClass(" current-progress");
@@ -217,6 +224,8 @@ function addProgress() {
   }
 }
 
+// Function to reset all the variables used on each question cycle.
+
 function clearDataAndRun() {
   $(".button").html("").removeClass("selected-answer message correct-answer");
   $(".speech-bubble").html("Your next question is...").removeClass("wrong correct-styling");
@@ -230,6 +239,8 @@ function clearDataAndRun() {
   assignData();
   rollNumber();
 }
+
+// Functions to set the content of the modal pop-up messages.
 
 function loss() {
     $(".modal-body").html("Unlucky! Next time try not to be so bad at the game. Regardless, today you go home with " + $grandPrize + " Better luck next time!").addClass(" modal-loss");
@@ -259,6 +270,8 @@ function checkpoint() {
 
     $('#myModal').modal('show');
 }
+
+// Function to reload the page on win/loss.
 
 function reset() {
   location.reload();
