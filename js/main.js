@@ -219,7 +219,7 @@ function addProgress() {
 
 function clearDataAndRun() {
   $(".button").html("").removeClass("selected-answer message correct-answer");
-  $(".speech-bubble").html("Your next question is...").removeClass("wrong correct-answer");
+  $(".speech-bubble").html("Your next question is...").removeClass("wrong correct-styling");
   $buttonPressed = "";
   $randomNumber = "";
   $question = "";
@@ -232,7 +232,7 @@ function clearDataAndRun() {
 }
 
 function loss() {
-    $(".modal-body").html("Unlucky! Next time try not to be so bad at the game. Regardless, today you go away with " + $grandPrize + " Better luck next time!").addClass(" modal-loss");
+    $(".modal-body").html("Unlucky! Next time try not to be so bad at the game. Regardless, today you go home with " + $grandPrize + " Better luck next time!").addClass(" modal-loss");
     $(".btn-stick").html("Try again").on("click", function () {
       reset();
     })
@@ -242,7 +242,7 @@ function loss() {
 }
 
 function winner() {
-    $(".modal-body").html("Congratulations! You are the greatest! You go away with our grand prize of " + $grandPrize + " But sorry, we've just had word... we have gone bankrupt due to over booking the actor who played Babe and won't be able to give you your prize. Please take a pack of a packet of Worcester Sauce crisps as a good will gesture.").addClass(" modal-win");
+    $(".modal-body").html("Congratulations! You are the greatest! You go home with our grand prize of " + $grandPrize + " ...But sorry, we've just had word... we have gone bankrupt due to over booking the actor who played Babe and won't be able to give you your prize. Please take a pack of a packet of Worcester Sauce crisps as a gesture of good will.").addClass(" modal-win");
     $(".btn-stick").html("Go again").on("click", function () {
       reset();
     })
@@ -252,7 +252,7 @@ function winner() {
 }
 
 function checkpoint() {
-    $(".modal-body").html("Congratulations! You are now guaranteed to go away with " + $grandPrize + " But you can still win more! Let's continue!").addClass(" modal-checkpoint");
+    $(".modal-body").html("Congratulations! You are now guaranteed to go home with " + $grandPrize + " But you can still win more! Let's continue!").addClass(" modal-checkpoint");
     $(".btn-stick").html("Continue!")
     $(".btn-rmv").remove(".btn-rmv");
     $(".difficulty-header").remove("h3");
