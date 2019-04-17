@@ -1,19 +1,12 @@
 $(function () {
 
-  $(window).on('load',function(){
-         $('#myModal').modal('show');
-     });
-// EASY API
-//https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple
-
-// MEDIUM API
-//https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple
-
-// HARD API
-//https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple
-
+$(window).on('load',function(){
+  $('#myModal').modal('show');
+});
 
 // Global variables
+
+var $difficulty = "";
 
 var $buttons = $(".button");
 var $buttonPressed = "";
@@ -27,21 +20,12 @@ var $answers = [];
 
 var $prizeValue = $(".progress-row");
 var $progressLevel = 14;
-var $prizeString = "A packet of Worcester Sauce crisps!";
-var $grandPrize = "";
+var $prizeString = "a packet of Worcester Sauce crisps!";
+var $grandPrize = "nothing!";
 
 // Functions
 
 assignData();
-// selectAndOutput();
-
-// As a new player
-// I need to be able to enter my name
-// and instructions regarding the game
-// and to be able to start the game
-// So I can play the game
-    // text field to enter the players name and button to confirm entry
-    // next screen gives instructions with button to start game
 
 function rollNumber() {
   var maxNum = 4;
@@ -51,8 +35,21 @@ function rollNumber() {
 
 rollNumber();
 
+$("#easy").on("click", function () {
+  $difficulty = "easy";
+  assignData();
+})
+$("#medium").on("click", function () {
+  $difficulty = "medium";
+  assignData();
+})
+$("#hard").on("click", function () {
+  $difficulty = "hard";
+  assignData();
+})
+
 function assignData() {
-  $.get("https://opentdb.com/api.php?amount=1&difficulty=&type=multiple", function(data) {
+  $.get("https://opentdb.com/api.php?amount=1&difficulty=" + $difficulty + "&type=multiple", function(data) {
     $question = data.results[0].question;
     $("#question-box").html($question);
     $correctAnswer = data.results[0].correct_answer;
@@ -114,7 +111,7 @@ function assignAnswers() {
 
 $($buttons).on("click", function () {
   if ($buttonPressed == "") {
-    $(this).addClass("selected-answer");
+    $(this).addClass(" selected-answer");
     $buttonPressed = $(this);
   }
   console.log($buttonPressed.html().substring(0,1));
@@ -132,7 +129,7 @@ $($buttons).on("click", function () {
   }, 1000);
   if ($correctButton == $buttonPressed.html().substring(0,1)) {
     setTimeout(function() {
-      $(".speech-bubble").html('"Congratulations! You\'ve won ' + $prizeString).addClass(" message correct-answer");
+      $(".speech-bubble").html('"Congratulations! You\'ve won ' + $prizeString).addClass(" message correct-styling");
       addProgress();
     }, 2000);
     setTimeout(function() {
@@ -141,14 +138,15 @@ $($buttons).on("click", function () {
   }
   else if ($correctButton != $buttonPressed.html().substring(0,1)) {
     setTimeout(function() {
-      $buttonPressed.html("God, I'm sorry but you really are garbage! Better luck next time.");
+      $buttonPressed.html("God, I'm sorry but you really are garbage!");
       $(".speech-bubble").html('"Awwww, poor you. Today you leave with nothing!"').addClass(" message wrong");
+      loss();
     }, 3000);
   }
 })
 
 function addProgress() {
-  $($prizeValue[$progressLevel]).addClass("current-progress");
+  $($prizeValue[$progressLevel]).addClass(" current-progress");
   $progressLevel--;
   switch ($progressLevel) {
     case 13:
@@ -161,13 +159,13 @@ function addProgress() {
       $prizeString = "£500,000!";
       break;
     case 10:
-      $prizeString = "A trip to Algeria with Paddy McGuiness!";
+      $prizeString = "a trip to Algeria with Paddy McGuiness!";
       break;
     case 9:
       $prizeString = "£2,000,000!";
       break;
     case 8:
-      $prizeString = "One bottle of Fiji OR Dasani water!";
+      $prizeString = "one bottle of Fiji OR Dasani water!";
       break;
     case 7:
       $prizeString = "£8,000,000!";
@@ -176,7 +174,7 @@ function addProgress() {
       $prizeString = "£16,000,000!";
       break;
     case 5:
-      $prizeString = "An invitation to a live Antique's Roadshow recording OF YOUR CHOICE!";
+      $prizeString = "an invitation to a live Antique's Roadshow recording OF YOUR CHOICE!";
       break;
     case 4:
       $prizeString = "£64,000,000!";
@@ -185,7 +183,7 @@ function addProgress() {
       $prizeString = "£125,000,000!";
       break;
     case 2:
-      $prizeString = "A spa day with the actor who played Babe!";
+      $prizeString = "a spa day with the actor who played Babe!";
       break;
     case 1:
       $prizeString = "£500,000,000!";
@@ -198,23 +196,26 @@ function addProgress() {
   }
 
   if ($progressLevel >= 10) {
-    $grandPrize = "Nothing!";
+    $grandPrize = "nothing!";
   }
   else if ($progressLevel < 10 && $progressLevel >= 5) {
-    $grandPrize = "A trip to Algeria with Paddy McGuiness!";
+    $grandPrize = "a trip to Algeria with Paddy McGuiness!";
   }
   else if ($progressLevel < 5 && $progressLevel >= 1) {
-    $grandPrize = "An invitation to a live Antique's Roadshow recording OF YOUR CHOICE!";
+    $grandPrize = "an invitation to a live Antique's Roadshow recording OF YOUR CHOICE!";
   }
-  else if ($progressLevel == 0) {
+  else if ($progressLevel === 0) {
     $grandPrize = "£1 Billion!";
+    winner();
   }
-  console.log($progressLevel);
-  // console.log($prizeValue);
-  //   console.log($prizeString);
-  console.log($grandPrize);
-}
 
+  if ($progressLevel === 9) {
+    checkpoint();
+  }
+  if ($progressLevel === 4) {
+    checkpoint();
+  }
+}
 
 function clearDataAndRun() {
   $(".button").html("").removeClass("selected-answer message correct-answer");
@@ -230,35 +231,36 @@ function clearDataAndRun() {
   rollNumber();
 }
 
+function loss() {
+    $(".modal-body").html("Unlucky! Next time try not to be so bad at the game. Regardless, today you go away with " + $grandPrize + " Better luck next time!").addClass(" modal-loss");
+    $(".btn-stick").html("Try again").on("click", function () {
+      reset();
+    })
+    $(".btn-rmv").remove(".btn-rmv");
 
-// As a player
-// I need to know if my answer was correct or incorrect
-// So I can continue with the game
-    // setTimeout once answer selected, correct answer shown after 2, flashing effect on correct answer
-      // css change for correct answer - make each element/answer box an ID?
-    // game over screen with money they have won - animations + message from lorraine kelly
-      // css/js animation plus inner html/html change to text boxes and a large message from lorraine
-    // continue to next question screen - animations + message from lorraine kelly
-      // css/js animation plus inner html/html change to text boxes and a large message from lorraine
+    $('#myModal').modal('show');
+}
 
-// As a player
-// I need my progress recorded in the bar
-// So I can know how I am doing in the game
-    // progress bar that changes colour for each question.
-      // on question change add css change to progress ID
+function winner() {
+    $(".modal-body").html("Congratulations! You are the greatest! You go away with our grand prize of " + $grandPrize + " But sorry, we've just had word... we have gone bankrupt due to over booking the actor who played Babe and won't be able to give you your prize. Please take a pack of a packet of Worcester Sauce crisps as a good will gesture.").addClass(" modal-win");
+    $(".btn-stick").html("Go again").on("click", function () {
+      reset();
+    })
+    $(".btn-rmv").remove(".btn-rmv");
 
-// As a player
-// I need to know when I have reached the threshold checkpoint
-// and
-// So I can
+    $('#myModal').modal('show');
+}
 
-// As a designer
-// I need to give the user some light feedback
-// and make the game feel more interactive by making the game host output some messages
-// So I can make it more exciting
-    // image of lorraine kelly in top right
-    // random text output random math - on whatever number output the text from that numbered response
-    // set invterval to output display box from hidden to visible + change inner html to random message every x amount of seconds
+function checkpoint() {
+    $(".modal-body").html("Congratulations! You are now guaranteed to go away with " + $grandPrize + " But you can still win more! Let's continue!").addClass(" modal-checkpoint");
+    $(".btn-stick").html("Continue!")
+    $(".btn-rmv").remove(".btn-rmv");
+    $(".difficulty-header").remove("h3");
 
+    $('#myModal').modal('show');
+}
 
+function reset() {
+  location.reload();
+}
 });
