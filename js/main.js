@@ -6,6 +6,8 @@ $(window).on('load',function(){
   $('#myModal').modal('show');
 });
 
+var $sounds = ["sounds/main_theme.mp3", "sounds/lets_play.mp3", "sounds/final_answer.mp3", "sounds/correct_answer.mp3", "sounds/wrong_answer.mp3"]
+
 // Global variables
 
 var $difficulty = "";
@@ -42,14 +44,20 @@ rollNumber();
 $("#easy").on("click", function () {
   $difficulty = "easy";
   assignData();
+  var audio = new Audio($sounds[1]);
+  audio.play();
 })
 $("#medium").on("click", function () {
   $difficulty = "medium";
   assignData();
+  var audio = new Audio($sounds[1]);
+  audio.play();
 })
 $("#hard").on("click", function () {
   $difficulty = "hard";
   assignData();
+  var audio = new Audio($sounds[1]);
+  audio.play();
 })
 
 function assignData() {
@@ -119,34 +127,46 @@ $($buttons).on("click", function () {
   if ($buttonPressed == "") {
     $(this).addClass(" selected-answer");
     $buttonPressed = $(this);
+    var audio = new Audio($sounds[2]);
+			audio.play();
+      setTimeout(function(){
+        audio.pause();
+      }, 3000);
   }
   setTimeout(function() {
     if ($correctButton == $buttonPressed.html().substring(0,1)) {
       $buttonPressed.addClass(" correct-answer").html("Correct Answer!");
+      var audio = new Audio($sounds[3]);
+  			audio.play();
     }
     else {
       for (var i = 0; i < $buttons.length; i++) {
         if ($($buttons[i]).html().substring(0,1) == $correctButton) {
           $($buttons[i]).addClass(" correct-answer").html("Correct Answer!");
+          var audio = new Audio($sounds[4]);
+            audio.play();
         }
       }
     }
-  }, 1000);
+  }, 2500);
   if ($correctButton == $buttonPressed.html().substring(0,1)) {
+    setTimeout(function(){
+      audio.pause();
+    }, 2000);
     setTimeout(function() {
       $(".speech-bubble").html('"Congratulations! You\'ve won ' + $prizeString).addClass(" message correct-styling");
       addProgress();
-    }, 2000);
+    }, 3500);
     setTimeout(function() {
       clearDataAndRun();
-    }, 3000);
+    }, 5700);
   }
   else if ($correctButton != $buttonPressed.html().substring(0,1)) {
     setTimeout(function() {
       $buttonPressed.html("God, I'm sorry but you really are garbage!");
       $(".speech-bubble").html('"Awwww, poor you. Today you leave with nothing!"').addClass(" message wrong");
       loss();
-    }, 3000);
+    }, 4500);
   }
 })
 
@@ -238,6 +258,10 @@ function clearDataAndRun() {
 
   assignData();
   rollNumber();
+
+  var audio = new Audio($sounds[0]);
+    audio.play();
+
 }
 
 // Functions to set the content of the modal pop-up messages.
@@ -248,6 +272,7 @@ function loss() {
       reset();
     })
     $(".btn-rmv").remove(".btn-rmv");
+    $(".difficulty-header").remove("h3");
 
     $('#myModal').modal('show');
 }
