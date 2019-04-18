@@ -329,6 +329,25 @@ body {
   color: #362968;
 }
 
+/* LIFELINE STYLING */
+
+.lifeline {
+  border-radius: 70%;
+  border: cornflowerblue 8px solid;
+  background-color: black;
+  font-size: 20px;
+  color: white;
+  padding: 40px;
+  margin: 30px;
+  margin-top: 50px;
+}
+
+.used {
+  border: red 4px solid;
+  color: red;
+  background-color: slategrey;
+}
+
 /* EXTRAS */
 
 .button-shape-answer-bottom {

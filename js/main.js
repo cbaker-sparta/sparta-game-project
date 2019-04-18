@@ -6,7 +6,7 @@ $(window).on('load',function(){
   $('#myModal').modal('show');
 });
 
-var $sounds = ["sounds/main_theme.mp3", "sounds/lets_play.mp3", "sounds/final_answer.mp3", "sounds/correct_answer.mp3", "sounds/wrong_answer.mp3"]
+var $sounds = ["sounds/main_theme.mp3", "sounds/lets_play.mp3", "sounds/final_answer.mp3", "sounds/correct_answer.mp3", "sounds/wrong_answer.mp3", "sounds/game_over.mp3", "sounds/victory.mp3"]
 
 // Global variables
 
@@ -20,6 +20,7 @@ var $randomNumber = "";
 var $question = "";
 var $correctAnswer = "";
 var $correctButton = "";
+var $wrongButtons = [];
 var $answers = [];
 
 var $prizeValue = $(".progress-row");
@@ -28,8 +29,6 @@ var $prizeString = "a packet of Worcester Sauce crisps!";
 var $grandPrize = "nothing!";
 
 // Functions
-
-assignData();
 
 // Functions assigning difficulty of questions and then assigning the API drawn questions and answers to buttons.
 
@@ -46,18 +45,21 @@ $("#easy").on("click", function () {
   assignData();
   var audio = new Audio($sounds[1]);
   audio.play();
+  $("#easy").off("click");
 })
 $("#medium").on("click", function () {
   $difficulty = "medium";
   assignData();
   var audio = new Audio($sounds[1]);
   audio.play();
+  $("#medium").off("click");
 })
 $("#hard").on("click", function () {
   $difficulty = "hard";
   assignData();
   var audio = new Audio($sounds[1]);
   audio.play();
+  $("#hard").off("click");
 })
 
 function assignData() {
@@ -76,21 +78,25 @@ function assignCorrectAnswer() {
     $("#A").html("A. " + $correctAnswer);
     $correctAnswer = "A. " + $correctAnswer;
     $correctButton = "A";
+    $wrongButtons = ["B", "C", "D"];
   }
   else if ($randomNumber == 1) {
     $("#B").html("B. " + $correctAnswer);
     $correctAnswer = "B. " + $correctAnswer;
     $correctButton = "B";
+    $wrongButtons = ["A", "C", "D"];
   }
   else if ($randomNumber == 2) {
     $("#C").html("C. " + $correctAnswer);
     $correctAnswer = "C. " + $correctAnswer;
     $correctButton = "C";
+    $wrongButtons = ["A", "B", "D"];
   }
   else if ($randomNumber == 3) {
     $("#D").html("D. " + $correctAnswer);
     $correctAnswer = "D. " + $correctAnswer;
     $correctButton = "D";
+    $wrongButtons = ["A", "B", "C"];
   }
   console.log($correctAnswer);
 }
@@ -131,13 +137,16 @@ $($buttons).on("click", function () {
 			audio.play();
       setTimeout(function(){
         audio.pause();
-      }, 3000);
+      }, 3300);
   }
   setTimeout(function() {
     if ($correctButton == $buttonPressed.html().substring(0,1)) {
       $buttonPressed.addClass(" correct-answer").html("Correct Answer!");
       var audio = new Audio($sounds[3]);
   			audio.play();
+        setTimeout(function(){
+          audio.pause();
+        }, 3500);
     }
     else {
       for (var i = 0; i < $buttons.length; i++) {
@@ -159,13 +168,15 @@ $($buttons).on("click", function () {
     }, 3500);
     setTimeout(function() {
       clearDataAndRun();
-    }, 5700);
+    }, 6000);
   }
   else if ($correctButton != $buttonPressed.html().substring(0,1)) {
     setTimeout(function() {
       $buttonPressed.html("God, I'm sorry but you really are garbage!");
       $(".speech-bubble").html('"Awwww, poor you. Today you leave with nothing!"').addClass(" message wrong");
       loss();
+      var audio = new Audio($sounds[5]);
+      audio.play();
     }, 4500);
   }
 })
@@ -260,6 +271,7 @@ function clearDataAndRun() {
   rollNumber();
 
   var audio = new Audio($sounds[0]);
+    audio.volume = 0.5;
     audio.play();
 
 }
@@ -285,6 +297,8 @@ function winner() {
     $(".btn-rmv").remove(".btn-rmv");
 
     $('#myModal').modal('show');
+    var audio = new Audio($sounds[6]);
+      audio.play();
 }
 
 function checkpoint() {
@@ -301,4 +315,44 @@ function checkpoint() {
 function reset() {
   location.reload();
 }
+
+
+// Lifeline Functions
+
+$(".lifeline").on("click", function () {
+  $(this).addClass(" used").off("click");
+  $wrongButtons = shuffle($wrongButtons);
+  if ($wrongButtons[0] == $("#A").html().substring(0,1) || $wrongButtons[1] == $("#A").html().substring(0,1)) {
+    $("#A").html("");
+  }
+  if ($wrongButtons[0] == $("#B").html().substring(0,1) || $wrongButtons[1] == $("#B").html().substring(0,1)) {
+    $("#B").html("");
+  }
+  if ($wrongButtons[0] == $("#C").html().substring(0,1) || $wrongButtons[1] == $("#C").html().substring(0,1)) {
+    $("#C").html("");
+  }
+  if ($wrongButtons[0] == $("#D").html().substring(0,1) || $wrongButtons[1] == $("#D").html().substring(0,1)) {
+    $("#D").html("");
+  }
+
+})
+
+// Fisher-Yates (aka Knuth) Shuffle.
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 });
