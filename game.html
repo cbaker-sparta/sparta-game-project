@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Who wants to be a Billionaire?</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/game.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Sintony:700" rel="stylesheet">
+  </head>
+  <body>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content modal-styles">
+          <div class="modal-header">
+            <h2 class="modal-title" id="myModalLabel">Welcome to Who wants to be a Billionaire!</h2>
+            <p class="instructions">with your host</p>
+            <h3>Lorraine Kelly!</h3>
+          </div>
+          <div class="modal-body">
+            <h3>INSTRUCTIONS:</h3>
+            <p class="instructions">"Hello there darling, I've heard you want to win some stuff. Well you've come to the right place! This completely new game that bears no resemblance to any other popular quiz show, and any likeness is pure coincidence and if you call the authorities I will sue you for libel, slander and ABH. I digress..."</p>
+            <p class="instructions">"The aim of the game is to answer questions to earn more money and prizes, up to a whopping £1 billion! With only your inferior brain and two lifelines, can you do it? LET'S FIND OUT!!!"</p>
+          </div>
+          <div class="modal-sfooter">
+            <h3 class="difficulty-header">CHOOSE YOUR DIFFICULTY:</h3>
+            <button id="easy" type="button" class="btn btn-stick btn-lg button-styling" data-dismiss="modal">Easy</button>
+            <button id="medium" type="button" class="btn btn-rmv btn-lg button-styling" data-dismiss="modal">Medium</button>
+            <button id="hard" type="button" class="btn btn-rmv btn-lg button-styling" data-dismiss="modal">Hard</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="left col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="col-lg-12 col-md-12">
+              <h2>YOUR PROGRESS</h2>
+              <div class="row div-shape progress-row"><p class="white-text">15 - £1 Billion</p></div>
+              <div class="row div-shape progress-row"><p>14 - £500,000,000</p></div>
+              <div class="row div-shape progress-row"><p>13 - A spa day with the actor who played Babe!</p></div>
+              <div class="row div-shape progress-row"><p>12 - £125,000,000</p></div>
+              <div class="row div-shape progress-row"><p>11 - £64,000,000</p></div>
+              <div class="row div-shape progress-row"><p class="white-text">10 - An invitation to a live Antique's Roadshow!</p></div>
+              <div class="row div-shape progress-row"><p>9 - £16,000,000</p></div>
+              <div class="row div-shape progress-row"><p>8 - £8,000,000</p></div>
+              <div class="row div-shape progress-row"><p>7 - One bottle of Fiji OR Dasani water!</p></div>
+              <div class="row div-shape progress-row"><p>6 - £2,000,000</p></div>
+              <div class="row div-shape progress-row"><p class="white-text">5 - A trip to Algeria with Paddy McGuiness!</p></div>
+              <div class="row div-shape progress-row"><p>4 - £500,000</p></div>
+              <div class="row div-shape progress-row"><p>3 - £300,000</p></div>
+              <div class="row div-shape progress-row"><p>2 - £200,000</p></div>
+              <div class="row div-shape progress-row"><p>1 - A packet of Worcester Sauce crisps!</p></div>
+            </div>
+          </div>
+          <div class="middle col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <img class="logo" src="images/mil_logo.png" alt="Who wants to be a millionaire logo">
+            <button class="lifeline" type="button" name="50/50" value="50/50">50:50</button>
+            <button class="lifeline" type="button" name="50/50" value="50/50">50:50</button>
+          </div>
+          <div class="right col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <h2>LORRAINE KELLY</h2>
+            <img class="lorraine" src="images/lorraine.jpg" alt="Picture of Lorraine Kelly">
+            <div class="speech-bubble">
+              <h3>Good luck!</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="containter">
+        <div class="row">
+          <div id="question-box" class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 div-shape-question question">
+            <p class="white-text"></P>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <button id="A"class="button white-text col-lg-5 col-md-5 button-shape-answer answer" type="button" name="A" value="A"></button>
+          <button id="B" class="button white-text col-lg-5 col-md-5 button-shape-answer answer" type="button" name="B" value="B"></button>
+          <button id="C" class="button white-text col-lg-5 col-md-5 button-shape-answer button-shape-answer-bottom answer" type="button" name="C" value="C"></button>
+          <button id="D" class="button white-textcol-lg-5 col-md-5 button-shape-answer button-shape-answer-bottom answer" type="button" name="D" value="D"></button>
+        </div>
+        <div class="row">
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
